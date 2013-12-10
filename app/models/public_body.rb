@@ -206,7 +206,6 @@ class PublicBody < ActiveRecord::Base
     self.non_versioned_columns << 'info_requests_overdue_count'
 
     class Version
-        attr_accessor :created_at
 
         def last_edit_comment_for_html_display
             text = self.last_edit_comment.strip
@@ -521,10 +520,8 @@ class PublicBody < ActiveRecord::Base
     end
 
     # Returns all public bodies (except for the internal admin authority) as csv
-    def self.export_csv
-        public_bodies = PublicBody.visible.find(:all, :order => 'url_name',
-                                              :include => [:translations, :tags])
-        FasterCSV.generate() do |csv|
+    def self.export_csv(output_filename)
+        CSV.open(output_filename, "w") do |csv|
             csv << [
                     'Name',
                     'Short name',
@@ -539,7 +536,7 @@ class PublicBody < ActiveRecord::Base
                     'Updated at',
                     'Version',
             ]
-            public_bodies.each do |public_body|
+            PublicBody.visible.find_each(:include => [:translations, :tags]) do |public_body|
                 # Skip bodies we use only for site admin
                 next if public_body.has_tag?('site_administration')
                 csv << [
@@ -731,6 +728,30 @@ class PublicBody < ActiveRecord::Base
             'cis_above' => cis_above,
             'y_max' => 100,
             'totals' => original_totals}
+    end
+    def self.popular_bodies(locale)
+        # get some example searches and public bodies to display
+        # either from config, or based on a (slow!) query if not set
+        body_short_names = AlaveteliConfiguration::frontpage_publicbody_examples.split(/\s*;\s*/)
+        locale_condition = 'public_body_translations.locale = ?'
+        conditions = [locale_condition, locale]
+        bodies = []
+        I18n.with_locale(locale) do
+            if body_short_names.empty?
+                # This is too slow
+                bodies = visible.find(:all,
+                    :order => "info_requests_count desc",
+                    :limit => 32,
+                    :conditions => conditions,
+                    :joins => :translations
+                )
+            else
+                conditions[0] += " and public_bodies.url_name in (?)"
+                conditions << body_short_names
+                bodies = find(:all, :conditions => conditions, :joins => :translations)
+            end
+        end
+        return bodies
     end
 
     private
