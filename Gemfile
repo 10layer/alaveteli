@@ -7,7 +7,7 @@ if File.exist? "/etc/debian_version" and File.open("/etc/debian_version").read.s
 end
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.16'
 
 gem 'pg'
 
@@ -23,7 +23,7 @@ gem 'jquery-ui-rails'
 gem 'json'
 gem 'mahoro'
 gem 'memcache-client'
-gem 'net-http-local'
+gem 'net-http-local', :platforms => [:ruby_18, :ruby_19]
 gem 'net-purge'
 gem 'newrelic_rpm'
 gem 'rack'

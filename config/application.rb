@@ -33,7 +33,6 @@ module Alaveteli
     # config.i18n.default_locale = :de
     I18n.config.enforce_available_locales = false
 
-
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
@@ -95,6 +94,7 @@ module Alaveteli
     # ... while these are individual files that can't easily be
     # grouped:
     config.assets.precompile += ['jquery.fancybox-1.3.4.pack.js',
+                                 'jquery.fancybox-1.3.4.css',
                                  'jquery.Jcrop.css',
                                  'excanvas.min.js',
                                  'fonts.css',
