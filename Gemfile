@@ -15,7 +15,7 @@ gem 'acts_as_versioned', :git => 'git://github.com/technoweenie/acts_as_versione
 gem 'capistrano'
 gem 'charlock_holmes'
 gem 'dynamic_form'
-gem 'exception_notification'
+gem 'exception_notification', '~>3.0.1'
 gem 'fastercsv', '>=1.5.5'
 gem 'jquery-rails', '~> 2.1'
 gem 'json'
@@ -56,7 +56,7 @@ group :test do
   gem 'fakeweb'
   gem 'coveralls', :require => false
   gem 'webrat'
-  gem 'nokogiri'
+  gem 'nokogiri', '~> 1.5.9'
 end
 
 group :development do
