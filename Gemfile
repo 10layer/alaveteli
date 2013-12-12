@@ -40,7 +40,7 @@ gem 'will_paginate'
 gem 'xapian-full-alaveteli', '~> 1.2.9.5'
 gem 'xml-simple', :require => 'xmlsimple'
 gem 'zip'
-gem 'rest-client' '~>1.6.7'
+gem 'rest-client', '~> 1.6.7'
 
 # Gems related to internationalisation
 gem 'fast_gettext'

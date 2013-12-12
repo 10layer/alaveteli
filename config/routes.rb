@@ -245,5 +245,9 @@ Alaveteli::Application.routes.draw do
     match '/api/v2/body/:id/request_events.:feed_type' => 'api#body_request_events', :as => :api_body_request_events, :feed_type => '^(json|atom)$'
     ####
 
+    #### DocumentCloud controller
+    get '/documentcloud/sync_all' => 'documentcloud#sync_all'
+    ####
+
     filter :conditionallyprependlocale
 end
