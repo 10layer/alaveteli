@@ -1,4 +1,4 @@
 #!/bin/bash
 TOP_DIR="$(dirname "$BASH_SOURCE")/.."
 cd "$TOP_DIR"
-bundle exec rails runner 'Documentcloud.sync'
+bundle exec rails runner -e production 'Documentcloud.sync_all()'
