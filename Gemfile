@@ -45,7 +45,7 @@ gem 'rest-client', '~> 1.6.7'
 # Gems related to internationalisation
 gem 'fast_gettext'
 gem 'gettext_i18n_rails'
-gem 'gettext'
+gem 'gettext', "~> 2.3.9"
 gem 'globalize3', :git => 'git://github.com/globalize/globalize.git', :ref => '5fd95f2389dff1'
 gem 'locale'
 gem 'routing-filter'
